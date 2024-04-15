@@ -1,36 +1,47 @@
-def bubble_sort(arr):
+def Bubble_sort(arr):
     n = len(arr)
-    for i in range(n - 1):
-        for j in range(0, n - i - 1):
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    for run in range(n - 1):
+        for i in range(n - 1 - run):
+            if arr[i] > arr[i + 1]:
+                arr[i], arr[i + 1] = arr[i + 1], arr[i]
     return arr
 
 
-def binary_search(arr, target):
-    left = 0
-    right = len(arr) - 1
-    while left <= right:
-        mid = (left + right) // 2
-        if arr[mid] == target:
-            return mid
-        elif arr[mid] < target:
-            left = mid + 1
+def binary_search(find_obj, lst):
+    pos = 0
+    Rusult0k = False
+    first = 0
+    last = len(lst) - 1
+
+    while first < last:
+        middle = (first + last) // 2
+        if lst[middle] == find_obj:
+            first = middle
+            last = first
+            Rusult0k = True
+            pos = middle
+        elif find_obj < lst[middle]:
+            first = middle + 1
         else:
-            right = mid - 1
-    return -1
+            last = middle - 1
 
-
-if __name__ == "__main__":
-    unsorted_list = [646, 346, 245, 132, 222, 141, 960]
-    print("Неотсортированный список:",unsorted_list)
-    sorted_list = bubble_sort(unsorted_list.copy())
-    print("Пузырьковая сортировка:", sorted_list)
-
-    target_element = 141
-
-    index = binary_search(sorted_list, target_element)
-    if index != -1:
-        print(f"Число {target_element} найдено в индексе {index}.")
+    if Rusult0k:
+        print("Число найдено, Индекс", pos)
     else:
-        print(f"Число {target_element} не найдено в списке.")
+        print("Число не найдено.")
+
+
+from random import randint as gen_nums
+
+my_list = []
+for num in range(11):
+
+    my_list.append(gen_nums(0, 20000))
+
+print("Несортированный список:", my_list)
+sorted_list = Bubble_sort(my_list)
+
+print("Пузырьковая сортировка:", sorted_list)
+search = int(input("Вы нашли число:"))
+
+binary_search(search, sorted_list)
